@@ -19,6 +19,9 @@ data/processed/*.csv
 *.pkl
 *.h5
 
+# Keep dashboard data
+!dashboard/data.json
+
 # IDE
 .vscode/
 .idea/

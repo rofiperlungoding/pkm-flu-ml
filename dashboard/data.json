@@ -1,0 +1,124 @@
+{
+  "lastUpdate": "2026-01-18T05:42:09.126224",
+  "dataSources": [
+    {
+      "database": "NCBI Protein Database",
+      "url": "https://www.ncbi.nlm.nih.gov/protein",
+      "query": "Influenza A H3N2 HA human 500:600[len]",
+      "count": 1500,
+      "date": "2026-01-18"
+    }
+  ],
+  "stats": {
+    "totalSeq": 1500,
+    "yearRange": "N/A"
+  },
+  "pipeline": [
+    {
+      "step": "Data Collection",
+      "status": "done",
+      "desc": "Downloaded 1500 sequences from NCBI"
+    },
+    {
+      "step": "Data Preprocessing",
+      "status": "progress",
+      "desc": "Parsing, filtering, quality control"
+    },
+    {
+      "step": "Feature Extraction",
+      "status": "pending",
+      "desc": "Physicochemical feature extraction"
+    },
+    {
+      "step": "Model Training",
+      "status": "pending",
+      "desc": "XGBoost classifier training"
+    },
+    {
+      "step": "Evaluation",
+      "status": "pending",
+      "desc": "Cross-validation & metrics"
+    },
+    {
+      "step": "Interpretation",
+      "status": "pending",
+      "desc": "Feature importance analysis"
+    }
+  ],
+  "sampleData": [
+    {
+      "acc": "YCL75363.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75362.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75361.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75360.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75359.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75358.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75357.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75356.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75355.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    },
+    {
+      "acc": "YCL75354.1",
+      "strain": "A/Unknown/?",
+      "year": 0,
+      "loc": "Unknown",
+      "len": 566
+    }
+  ],
+  "yearDistribution": {
+    "labels": [],
+    "data": []
+  }
+}

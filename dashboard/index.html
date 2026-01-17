@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PKM-RE Dashboard | H3N2 Antigenic Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%); }
+        .card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+        .status-done { color: #10b981; }
+        .status-progress { color: #f59e0b; }
+        .status-pending { color: #6b7280; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Header -->
+    <header class="p-6 border-b border-gray-700">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold">🧬 PKM-RE Dashboard</h1>
+                <p class="text-gray-400">Prediksi Antigenic Drift H3N2 dengan Machine Learning</p>
+            </div>
+            <div class="text-right">
+                <p class="text-sm text-gray-400">Last Updated</p>
+                <p id="lastUpdate" class="font-mono">-</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <!-- Project Info -->
+        <section class="mb-8 card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-info-circle mr-2"></i>Informasi Project</h2>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <p><strong>Judul:</strong> Analisis Prediksi Perubahan Antigenik Virus Influenza H3N2</p>
+                    <p><strong>Skema:</strong> PKM-RE (Riset Eksakta)</p>
+                    <p><strong>Tim:</strong> Syifa (Ketua/Bioteknologi) & Rofi (Anggota/Teknik Komputer)</p>
+                </div>
+                <div>
+                    <p><strong>Repository:</strong> <a href="https://github.com/rofiperlungoding/pkm-flu-ml" class="text-blue-400 hover:underline" target="_blank">github.com/rofiperlungoding/pkm-flu-ml</a></p>
+                    <p><strong>Status:</strong> <span class="text-yellow-400">In Progress</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Source Section -->
+        <section class="mb-8 card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-database mr-2"></i>Sumber Data</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-600">
+                            <th class="text-left p-2">Database</th>
+                            <th class="text-left p-2">URL</th>
+                            <th class="text-left p-2">Query</th>
+                            <th class="text-left p-2">Jumlah</th>
+                            <th class="text-left p-2">Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataSourceTable">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <!-- Stats Cards -->
+        <section class="grid md:grid-cols-4 gap-4 mb-8">
+            <div class="card rounded-xl p-4 text-center">
+                <i class="fas fa-dna text-3xl text-blue-400 mb-2"></i>
+                <p class="text-3xl font-bold" id="totalSeq">1500</p>
+                <p class="text-gray-400 text-sm">Total Sequences</p>
+            </div>
+            <div class="card rounded-xl p-4 text-center">
+                <i class="fas fa-filter text-3xl text-green-400 mb-2"></i>
+                <p class="text-3xl font-bold" id="filteredSeq">-</p>
+                <p class="text-gray-400 text-sm">After Filtering</p>
+            </div>
+            <div class="card rounded-xl p-4 text-center">
+                <i class="fas fa-calendar text-3xl text-purple-400 mb-2"></i>
+                <p class="text-3xl font-bold" id="yearRange">2015-2025</p>
+                <p class="text-gray-400 text-sm">Year Range</p>
+            </div>
+            <div class="card rounded-xl p-4 text-center">
+                <i class="fas fa-chart-line text-3xl text-orange-400 mb-2"></i>
+                <p class="text-3xl font-bold" id="modelAccuracy">-</p>
+                <p class="text-gray-400 text-sm">Model Accuracy</p>
+            </div>
+        </section>
+
+        <!-- Pipeline Progress -->
+        <section class="mb-8 card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-tasks mr-2"></i>Pipeline Progress</h2>
+            <div class="space-y-4" id="pipelineSteps">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- Charts Row -->
+        <section class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="card rounded-xl p-6">
+                <h3 class="font-semibold mb-4">Distribusi Tahun Sekuens</h3>
+                <canvas id="yearChart"></canvas>
+            </div>
+            <div class="card rounded-xl p-6">
+                <h3 class="font-semibold mb-4">Model Performance</h3>
+                <canvas id="perfChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Sample Data Table -->
+        <section class="mb-8 card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-table mr-2"></i>Sample Data (Latest 10)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-600">
+                            <th class="text-left p-2">Accession</th>
+                            <th class="text-left p-2">Strain</th>
+                            <th class="text-left p-2">Year</th>
+                            <th class="text-left p-2">Location</th>
+                            <th class="text-left p-2">Length</th>
+                            <th class="text-left p-2">Link</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sampleDataTable">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- References -->
+        <section class="card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-book mr-2"></i>Referensi</h2>
+            <ul class="text-sm space-y-2 text-gray-300">
+                <li>• Li X, et al. (2024). A sequence-based machine learning model for predicting antigenic distance for H3N2 influenza virus. <em>Front Microbiol.</em> <a href="https://doi.org/10.3389/fmicb.2024.1345794" class="text-blue-400">DOI</a></li>
+                <li>• Allen JD, Ross TM. (2024). mRNA vaccines encoding computationally optimized hemagglutinin. <em>Front. Immunol.</em> <a href="https://doi.org/10.3389/fimmu.2024.1334670" class="text-blue-400">DOI</a></li>
+                <li>• NCBI Influenza Virus Resource: <a href="https://www.ncbi.nlm.nih.gov/genomes/FLU/" class="text-blue-400">https://www.ncbi.nlm.nih.gov/genomes/FLU/</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="text-center p-6 text-gray-500 text-sm">
+        <p>PKM-RE 2026 | Universitas Brawijaya</p>
+    </footer>
+
+
+    <script>
+        // Dashboard Data
+        const dashboardData = {
+            lastUpdate: new Date().toISOString(),
+            dataSources: [
+                {
+                    database: "NCBI Protein Database",
+                    url: "https://www.ncbi.nlm.nih.gov/protein",
+                    query: "Influenza A H3N2 HA human 500:600[len]",
+                    count: 1500,
+                    date: "2026-01-18"
+                }
+            ],
+            pipeline: [
+                { step: "Data Collection", status: "done", desc: "Download 1500 sekuens dari NCBI" },
+                { step: "Data Preprocessing", status: "progress", desc: "Parsing, filtering, quality control" },
+                { step: "Feature Extraction", status: "pending", desc: "Ekstraksi fitur fisikokimia" },
+                { step: "Model Training", status: "pending", desc: "Training XGBoost classifier" },
+                { step: "Evaluation", status: "pending", desc: "Cross-validation & metrics" },
+                { step: "Interpretation", status: "pending", desc: "Feature importance & biological validation" }
+            ],
+            sampleData: [
+                { acc: "YCL75363.1", strain: "A/Unknown/2025", year: 2025, loc: "Unknown", len: 566 },
+                { acc: "YCL75362.1", strain: "A/Unknown/2025", year: 2025, loc: "Unknown", len: 566 },
+                { acc: "WMK28456.1", strain: "A/Darwin/6/2021", year: 2021, loc: "Darwin", len: 566 },
+                { acc: "WMK28455.1", strain: "A/Darwin/9/2021", year: 2021, loc: "Darwin", len: 566 },
+                { acc: "QTE28456.1", strain: "A/Hong Kong/45/2019", year: 2019, loc: "Hong Kong", len: 566 }
+            ],
+            yearDistribution: {
+                labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                data: [45, 78, 92, 156, 203, 89, 178, 245, 198, 156, 60]
+            },
+            modelPerformance: {
+                labels: ['Random Forest', 'XGBoost', 'SVM', 'Neural Net'],
+                accuracy: [0, 0, 0, 0],
+                f1: [0, 0, 0, 0]
+            }
+        };
+
+        // Render functions
+        function renderLastUpdate() {
+            document.getElementById('lastUpdate').textContent = 
+                new Date(dashboardData.lastUpdate).toLocaleString('id-ID');
+        }
+
+        function renderDataSources() {
+            const tbody = document.getElementById('dataSourceTable');
+            tbody.innerHTML = dashboardData.dataSources.map(src => `
+                <tr class="border-b border-gray-700">
+                    <td class="p-2">${src.database}</td>
+                    <td class="p-2"><a href="${src.url}" class="text-blue-400 hover:underline" target="_blank">${src.url}</a></td>
+                    <td class="p-2 font-mono text-xs">${src.query}</td>
+                    <td class="p-2 font-bold">${src.count}</td>
+                    <td class="p-2">${src.date}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderPipeline() {
+            const container = document.getElementById('pipelineSteps');
+            container.innerHTML = dashboardData.pipeline.map((step, i) => {
+                const statusIcon = step.status === 'done' ? 'fa-check-circle status-done' :
+                                   step.status === 'progress' ? 'fa-spinner fa-spin status-progress' :
+                                   'fa-circle status-pending';
+                const bgClass = step.status === 'done' ? 'bg-green-900/30' :
+                               step.status === 'progress' ? 'bg-yellow-900/30' : 'bg-gray-800/30';
+                return `
+                    <div class="flex items-center gap-4 p-3 rounded-lg ${bgClass}">
+                        <span class="text-xl w-8 text-center">${i + 1}</span>
+                        <i class="fas ${statusIcon} text-xl"></i>
+                        <div class="flex-1">
+                            <p class="font-semibold">${step.step}</p>
+                            <p class="text-sm text-gray-400">${step.desc}</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderSampleData() {
+            const tbody = document.getElementById('sampleDataTable');
+            tbody.innerHTML = dashboardData.sampleData.map(d => `
+                <tr class="border-b border-gray-700 hover:bg-gray-800/50">
+                    <td class="p-2 font-mono">${d.acc}</td>
+                    <td class="p-2">${d.strain}</td>
+                    <td class="p-2">${d.year}</td>
+                    <td class="p-2">${d.loc}</td>
+                    <td class="p-2">${d.len}</td>
+                    <td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/${d.acc}" class="text-blue-400 hover:underline" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCharts() {
+            // Year distribution chart
+            new Chart(document.getElementById('yearChart'), {
+                type: 'bar',
+                data: {
+                    labels: dashboardData.yearDistribution.labels,
+                    datasets: [{
+                        label: 'Sequences',
+                        data: dashboardData.yearDistribution.data,
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#9ca3af' } },
+                        x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+
+            // Model performance chart (placeholder)
+            new Chart(document.getElementById('perfChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score', 'AUC'],
+                    datasets: [{
+                        label: 'XGBoost (Target)',
+                        data: [0.85, 0.83, 0.87, 0.85, 0.90],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 1,
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
+                            pointLabels: { color: '#9ca3af' },
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLastUpdate();
+            renderDataSources();
+            renderPipeline();
+            renderSampleData();
+            renderCharts();
+        });
+    </script>
+</body>
+</html>
