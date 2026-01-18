@@ -1,0 +1,117 @@
+{
+  "project": "PKM-RE H3N2 Antigenic Prediction",
+  "team": "Syifa (Bioteknologi) & Rofi (Teknik Komputer)",
+  "institution": "Universitas Brawijaya",
+  "download_timestamp": "2026-01-18T06:16:18.093756",
+  "summary": {
+    "total_sequences": 2818,
+    "unique_sequences": 2818,
+    "duplicates_removed": 6213,
+    "with_year_info": 2225,
+    "with_location_info": 1073,
+    "human_host_confirmed": 2184,
+    "high_quality_count": 2204
+  },
+  "year_range": {
+    "min": 1996,
+    "max": 2024
+  },
+  "sources": {
+    "breakdown": {
+      "existing": 593,
+      "NCBI 2023-2026": 587,
+      "NCBI 2020-2022": 557,
+      "NCBI 2015-2019": 1066,
+      "vaccine_strains": 15
+    },
+    "databases": {
+      "NCBI Protein": {
+        "url": "https://www.ncbi.nlm.nih.gov/protein",
+        "description": "NCBI Protein Database - primary source for protein sequences",
+        "access_method": "Entrez API (Biopython)"
+      },
+      "NCBI Virus": {
+        "url": "https://www.ncbi.nlm.nih.gov/labs/virus/vssi/",
+        "description": "NCBI Virus portal - curated viral sequences"
+      },
+      "NCBI Influenza": {
+        "url": "https://www.ncbi.nlm.nih.gov/genomes/FLU/",
+        "description": "NCBI Influenza Virus Resource"
+      },
+      "GISAID": {
+        "url": "https://www.gisaid.org/",
+        "description": "Global Initiative on Sharing All Influenza Data (requires registration)",
+        "note": "Not used in this download - requires separate access"
+      }
+    }
+  },
+  "year_distribution": {
+    "1996": 4,
+    "1999": 2,
+    "2001": 2,
+    "2003": 2,
+    "2005": 2,
+    "2007": 13,
+    "2008": 10,
+    "2009": 42,
+    "2010": 19,
+    "2011": 37,
+    "2012": 86,
+    "2013": 84,
+    "2014": 214,
+    "2015": 378,
+    "2016": 266,
+    "2017": 236,
+    "2018": 31,
+    "2019": 89,
+    "2020": 7,
+    "2021": 54,
+    "2022": 506,
+    "2023": 78,
+    "2024": 63
+  },
+  "top_20_locations": {
+    "Unknown": 1144,
+    "Victoria": 127,
+    "New York": 86,
+    "Brisbane": 73,
+    "South Australia": 73,
+    "Sydney": 56,
+    "Nicaragua": 42,
+    "Oklahoma": 35,
+    "Thailand": 32,
+    "Perth": 30,
+    "Japan": 30,
+    "North Carolina": 29,
+    "Washington": 28,
+    "Texas": 28,
+    "Georgia": 24,
+    "California": 23,
+    "Tasmania": 23,
+    "Kenya": 21,
+    "swine": 20,
+    "Canberra": 19
+  },
+  "quality_distribution": {
+    "5.0": 3,
+    "6.0": 18,
+    "8.0": 1151,
+    "10.0": 1053
+  },
+  "data_quality_criteria": {
+    "has_year": "+3 points",
+    "has_location": "+2 points",
+    "is_human_host": "+2 points",
+    "is_h3n2_confirmed": "+2 points",
+    "has_host_info": "+1 point",
+    "max_score": 10,
+    "high_quality_threshold": 7
+  },
+  "files_generated": [
+    "data/raw/h3n2_ha_all.fasta",
+    "data/processed/h3n2_ha_comprehensive.csv",
+    "data/processed/h3n2_ha_high_quality.csv",
+    "data/processed/data_provenance.json",
+    "dashboard/data.json"
+  ]
+}

@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #0d1b2a 100%); }
-        .card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+        .card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         .status-done { color: #10b981; }
         .status-progress { color: #f59e0b; }
         .status-pending { color: #6b7280; }
     </style>
 </head>
 <body class="gradient-bg min-h-screen text-white">
-    <!-- Header -->
     <header class="p-6 border-b border-gray-700">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div>
@@ -25,7 +24,7 @@
             </div>
             <div class="text-right">
                 <p class="text-sm text-gray-400">Last Updated</p>
-                <p id="lastUpdate" class="font-mono">-</p>
+                <p class="font-mono">18/01/2026, 06:16:18</p>
             </div>
         </div>
     </header>
@@ -56,50 +55,83 @@
                         <tr class="border-b border-gray-600">
                             <th class="text-left p-2">Database</th>
                             <th class="text-left p-2">URL</th>
-                            <th class="text-left p-2">Query</th>
                             <th class="text-left p-2">Jumlah</th>
                             <th class="text-left p-2">Tanggal</th>
                         </tr>
                     </thead>
-                    <tbody id="dataSourceTable">
-                        <!-- Populated by JS -->
+                    <tbody>
+                        <tr class="border-b border-gray-700"><td class="p-2">Existing Data</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein" class="text-blue-400">NCBI Protein</a></td><td class="p-2 font-bold">593</td><td class="p-2">2026-01-18</td></tr>
+                        <tr class="border-b border-gray-700"><td class="p-2">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein" class="text-blue-400">NCBI Protein</a></td><td class="p-2 font-bold">587</td><td class="p-2">2026-01-18</td></tr>
+                        <tr class="border-b border-gray-700"><td class="p-2">NCBI 2020-2022</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein" class="text-blue-400">NCBI Protein</a></td><td class="p-2 font-bold">557</td><td class="p-2">2026-01-18</td></tr>
+                        <tr class="border-b border-gray-700"><td class="p-2">NCBI 2015-2019</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein" class="text-blue-400">NCBI Protein</a></td><td class="p-2 font-bold">1066</td><td class="p-2">2026-01-18</td></tr>
+                        <tr class="border-b border-gray-700"><td class="p-2">WHO Vaccine Strains</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein" class="text-blue-400">NCBI Protein</a></td><td class="p-2 font-bold">15</td><td class="p-2">2026-01-18
+</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-
         <!-- Stats Cards -->
         <section class="grid md:grid-cols-4 gap-4 mb-8">
             <div class="card rounded-xl p-4 text-center">
                 <i class="fas fa-dna text-3xl text-blue-400 mb-2"></i>
-                <p class="text-3xl font-bold" id="totalSeq">1500</p>
+                <p class="text-3xl font-bold">2,818</p>
                 <p class="text-gray-400 text-sm">Total Sequences</p>
             </div>
             <div class="card rounded-xl p-4 text-center">
-                <i class="fas fa-filter text-3xl text-green-400 mb-2"></i>
-                <p class="text-3xl font-bold" id="filteredSeq">-</p>
-                <p class="text-gray-400 text-sm">After Filtering</p>
+                <i class="fas fa-star text-3xl text-green-400 mb-2"></i>
+                <p class="text-3xl font-bold">2,204</p>
+                <p class="text-gray-400 text-sm">High Quality (≥7)</p>
             </div>
             <div class="card rounded-xl p-4 text-center">
                 <i class="fas fa-calendar text-3xl text-purple-400 mb-2"></i>
-                <p class="text-3xl font-bold" id="yearRange">2015-2025</p>
+                <p class="text-3xl font-bold">1996-2024</p>
                 <p class="text-gray-400 text-sm">Year Range</p>
             </div>
             <div class="card rounded-xl p-4 text-center">
-                <i class="fas fa-chart-line text-3xl text-orange-400 mb-2"></i>
-                <p class="text-3xl font-bold" id="modelAccuracy">-</p>
-                <p class="text-gray-400 text-sm">Model Accuracy</p>
+                <i class="fas fa-user text-3xl text-orange-400 mb-2"></i>
+                <p class="text-3xl font-bold">2,184</p>
+                <p class="text-gray-400 text-sm">Human Host</p>
             </div>
         </section>
 
         <!-- Pipeline Progress -->
         <section class="mb-8 card rounded-xl p-6">
             <h2 class="text-xl font-semibold mb-4"><i class="fas fa-tasks mr-2"></i>Pipeline Progress</h2>
-            <div class="space-y-4" id="pipelineSteps">
-                <!-- Populated by JS -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-green-900/30">
+                    <span class="text-xl w-8 text-center">1</span>
+                    <i class="fas fa-check-circle status-done text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Data Collection</p><p class="text-sm text-gray-400">Downloaded 2818 sequences from NCBI</p></div>
+                </div>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-green-900/30">
+                    <span class="text-xl w-8 text-center">2</span>
+                    <i class="fas fa-check-circle status-done text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Data Preprocessing</p><p class="text-sm text-gray-400">Deduplicated, labeled, quality scored</p></div>
+                </div>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-green-900/30">
+                    <span class="text-xl w-8 text-center">3</span>
+                    <i class="fas fa-check-circle status-done text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Feature Extraction</p><p class="text-sm text-gray-400">Extracted 74 physicochemical features</p></div>
+                </div>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-green-900/30">
+                    <span class="text-xl w-8 text-center">4</span>
+                    <i class="fas fa-check-circle status-done text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Model Training</p><p class="text-sm text-gray-400">XGBoost trained - 93.5% accuracy (multi-class)</p></div>
+                </div>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-green-900/30">
+                    <span class="text-xl w-8 text-center">5</span>
+                    <i class="fas fa-check-circle status-done text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Evaluation</p><p class="text-sm text-gray-400">5-fold CV: 87.6% | Binary model: 99.5% accuracy</p></div>
+                </div>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-yellow-900/30">
+                    <span class="text-xl w-8 text-center">6</span>
+                    <i class="fas fa-spinner fa-spin status-progress text-xl"></i>
+                    <div class="flex-1"><p class="font-semibold">Interpretation</p><p class="text-sm text-gray-400">Feature importance analysis in progress</p></div>
+                </div>
             </div>
         </section>
+
 
         <!-- Charts Row -->
         <section class="grid md:grid-cols-2 gap-6 mb-8">
@@ -108,8 +140,45 @@
                 <canvas id="yearChart"></canvas>
             </div>
             <div class="card rounded-xl p-6">
-                <h3 class="font-semibold mb-4">Model Performance</h3>
-                <canvas id="perfChart"></canvas>
+                <h3 class="font-semibold mb-4">Top 10 Lokasi</h3>
+                <canvas id="locationChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Model Performance Section -->
+        <section class="mb-8 card rounded-xl p-6">
+            <h2 class="text-xl font-semibold mb-4"><i class="fas fa-chart-line mr-2"></i>Model Performance</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-800/50 rounded-lg p-4">
+                    <h4 class="font-semibold text-blue-400 mb-3">Multi-class Model (4 Periods)</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span>CV Accuracy:</span><span class="font-bold">87.64%</span></div>
+                        <div class="flex justify-between"><span>Test Accuracy:</span><span class="font-bold text-green-400">93.48%</span></div>
+                        <div class="flex justify-between"><span>F1-Score:</span><span class="font-bold">93.48%</span></div>
+                        <div class="flex justify-between"><span>Precision:</span><span class="font-bold">93.49%</span></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3">Classes: 2009-2013, 2014-2016, 2017-2019, 2020-2024</p>
+                </div>
+                <div class="bg-gray-800/50 rounded-lg p-4">
+                    <h4 class="font-semibold text-green-400 mb-3">Binary Model (Recent vs Historical)</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between"><span>CV Accuracy:</span><span class="font-bold">99.42%</span></div>
+                        <div class="flex justify-between"><span>Test Accuracy:</span><span class="font-bold text-green-400">99.55%</span></div>
+                        <div class="flex justify-between"><span>F1-Score:</span><span class="font-bold">99.55%</span></div>
+                        <div class="flex justify-between"><span>ROC-AUC:</span><span class="font-bold text-yellow-400">1.00</span></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3">Threshold: 2020 (Recent ≥2020, Historical &lt;2020)</p>
+                </div>
+            </div>
+            <div class="mt-4 bg-gray-800/50 rounded-lg p-4">
+                <h4 class="font-semibold text-purple-400 mb-3">Top 5 Important Features</h4>
+                <div class="grid md:grid-cols-5 gap-2 text-xs">
+                    <div class="bg-purple-900/30 p-2 rounded text-center"><span class="block font-bold">aa_Y</span>Tyrosine composition</div>
+                    <div class="bg-purple-900/30 p-2 rounded text-center"><span class="block font-bold">polar_ratio</span>Polar AA ratio</div>
+                    <div class="bg-purple-900/30 p-2 rounded text-center"><span class="block font-bold">aa_Q</span>Glutamine composition</div>
+                    <div class="bg-purple-900/30 p-2 rounded text-center"><span class="block font-bold">epitope_A_charge</span>Epitope A charge</div>
+                    <div class="bg-purple-900/30 p-2 rounded text-center"><span class="block font-bold">epitope_E_hydro</span>Epitope E hydrophobicity</div>
+                </div>
             </div>
         </section>
 
@@ -121,15 +190,26 @@
                     <thead>
                         <tr class="border-b border-gray-600">
                             <th class="text-left p-2">Accession</th>
-                            <th class="text-left p-2">Strain</th>
                             <th class="text-left p-2">Year</th>
                             <th class="text-left p-2">Location</th>
-                            <th class="text-left p-2">Length</th>
+                            <th class="text-left p-2">Quality</th>
+                            <th class="text-left p-2">Source</th>
                             <th class="text-left p-2">Link</th>
                         </tr>
                     </thead>
-                    <tbody id="sampleDataTable">
-                        <!-- Populated by JS -->
+                    <tbody>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD27284.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD27284.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD33441.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD33441.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD33429.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD33429.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD27332.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD27332.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD27320.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD27320.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD27260.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD27260.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XFD27237.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 
+2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XFD27237.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XHM98641.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XHM98641.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XHM98628.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XHM98628.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link-alt"></i></a></td></tr>
+                        <tr class="border-b border-gray-700 hover:bg-gray-800/50"><td class="p-2 font-mono">XHM98627.1</td><td class="p-2">2024</td><td class="p-2">Unknown</td><td class="p-2">8/10</td><td class="p-2 text-xs">NCBI 2023-2026</td><td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/XHM98627.1" class="text-blue-400" target="_blank"><i class="fas fa-external-link
+-alt"></i></a></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -140,7 +220,8 @@
             <h2 class="text-xl font-semibold mb-4"><i class="fas fa-book mr-2"></i>Referensi</h2>
             <ul class="text-sm space-y-2 text-gray-300">
                 <li>• Li X, et al. (2024). A sequence-based machine learning model for predicting antigenic distance for H3N2 influenza virus. <em>Front Microbiol.</em> <a href="https://doi.org/10.3389/fmicb.2024.1345794" class="text-blue-400">DOI</a></li>
-                <li>• Allen JD, Ross TM. (2024). mRNA vaccines encoding computationally optimized hemagglutinin. <em>Front. Immunol.</em> <a href="https://doi.org/10.3389/fimmu.2024.1334670" class="text-blue-400">DOI</a></li>
+                <li>• Allen JD, Ross TM. (2024). mRNA vaccines encoding computationally optimized hemagglutinin. <em>Front. Immunol.</em> <a href="https://doi.org/10.3389/fimmu.2024.1334670" class="text-blue-400
+">DOI</a></li>
                 <li>• NCBI Influenza Virus Resource: <a href="https://www.ncbi.nlm.nih.gov/genomes/FLU/" class="text-blue-400">https://www.ncbi.nlm.nih.gov/genomes/FLU/</a></li>
             </ul>
         </section>
@@ -150,160 +231,44 @@
         <p>PKM-RE 2026 | Universitas Brawijaya</p>
     </footer>
 
-
     <script>
-        // Dashboard Data
-        const dashboardData = {
-            lastUpdate: new Date().toISOString(),
-            dataSources: [
-                {
-                    database: "NCBI Protein Database",
-                    url: "https://www.ncbi.nlm.nih.gov/protein",
-                    query: "Influenza A H3N2 HA human 500:600[len]",
-                    count: 1500,
-                    date: "2026-01-18"
-                }
-            ],
-            pipeline: [
-                { step: "Data Collection", status: "done", desc: "Download 1500 sekuens dari NCBI" },
-                { step: "Data Preprocessing", status: "progress", desc: "Parsing, filtering, quality control" },
-                { step: "Feature Extraction", status: "pending", desc: "Ekstraksi fitur fisikokimia" },
-                { step: "Model Training", status: "pending", desc: "Training XGBoost classifier" },
-                { step: "Evaluation", status: "pending", desc: "Cross-validation & metrics" },
-                { step: "Interpretation", status: "pending", desc: "Feature importance & biological validation" }
-            ],
-            sampleData: [
-                { acc: "YCL75363.1", strain: "A/Unknown/2025", year: 2025, loc: "Unknown", len: 566 },
-                { acc: "YCL75362.1", strain: "A/Unknown/2025", year: 2025, loc: "Unknown", len: 566 },
-                { acc: "WMK28456.1", strain: "A/Darwin/6/2021", year: 2021, loc: "Darwin", len: 566 },
-                { acc: "WMK28455.1", strain: "A/Darwin/9/2021", year: 2021, loc: "Darwin", len: 566 },
-                { acc: "QTE28456.1", strain: "A/Hong Kong/45/2019", year: 2019, loc: "Hong Kong", len: 566 }
-            ],
-            yearDistribution: {
-                labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
-                data: [45, 78, 92, 156, 203, 89, 178, 245, 198, 156, 60]
+        // Year distribution chart
+        new Chart(document.getElementById('yearChart'), {
+            type: 'bar',
+            data: {
+                labels: ['1996','1999','2001','2003','2005','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'],
+                datasets: [{
+                    label: 'Sequences',
+                    data: [4,2,2,2,2,13,10,42,19,37,86,84,214,378,266,236,31,89,7,54,506,78,63],
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
+                }]
             },
-            modelPerformance: {
-                labels: ['Random Forest', 'XGBoost', 'SVM', 'Neural Net'],
-                accuracy: [0, 0, 0, 0],
-                f1: [0, 0, 0, 0]
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#9ca3af' } },
+                    x: { grid: { display: false }, ticks: { color: '#9ca3af', maxRotation: 45 } }
+                }
             }
-        };
+        });
 
-        // Render functions
-        function renderLastUpdate() {
-            document.getElementById('lastUpdate').textContent = 
-                new Date(dashboardData.lastUpdate).toLocaleString('id-ID');
-        }
-
-        function renderDataSources() {
-            const tbody = document.getElementById('dataSourceTable');
-            tbody.innerHTML = dashboardData.dataSources.map(src => `
-                <tr class="border-b border-gray-700">
-                    <td class="p-2">${src.database}</td>
-                    <td class="p-2"><a href="${src.url}" class="text-blue-400 hover:underline" target="_blank">${src.url}</a></td>
-                    <td class="p-2 font-mono text-xs">${src.query}</td>
-                    <td class="p-2 font-bold">${src.count}</td>
-                    <td class="p-2">${src.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        function renderPipeline() {
-            const container = document.getElementById('pipelineSteps');
-            container.innerHTML = dashboardData.pipeline.map((step, i) => {
-                const statusIcon = step.status === 'done' ? 'fa-check-circle status-done' :
-                                   step.status === 'progress' ? 'fa-spinner fa-spin status-progress' :
-                                   'fa-circle status-pending';
-                const bgClass = step.status === 'done' ? 'bg-green-900/30' :
-                               step.status === 'progress' ? 'bg-yellow-900/30' : 'bg-gray-800/30';
-                return `
-                    <div class="flex items-center gap-4 p-3 rounded-lg ${bgClass}">
-                        <span class="text-xl w-8 text-center">${i + 1}</span>
-                        <i class="fas ${statusIcon} text-xl"></i>
-                        <div class="flex-1">
-                            <p class="font-semibold">${step.step}</p>
-                            <p class="text-sm text-gray-400">${step.desc}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderSampleData() {
-            const tbody = document.getElementById('sampleDataTable');
-            tbody.innerHTML = dashboardData.sampleData.map(d => `
-                <tr class="border-b border-gray-700 hover:bg-gray-800/50">
-                    <td class="p-2 font-mono">${d.acc}</td>
-                    <td class="p-2">${d.strain}</td>
-                    <td class="p-2">${d.year}</td>
-                    <td class="p-2">${d.loc}</td>
-                    <td class="p-2">${d.len}</td>
-                    <td class="p-2"><a href="https://www.ncbi.nlm.nih.gov/protein/${d.acc}" class="text-blue-400 hover:underline" target="_blank"><i class="fas fa-external-link-alt"></i></a></td>
-                </tr>
-            `).join('');
-        }
-
-        function renderCharts() {
-            // Year distribution chart
-            new Chart(document.getElementById('yearChart'), {
-                type: 'bar',
-                data: {
-                    labels: dashboardData.yearDistribution.labels,
-                    datasets: [{
-                        label: 'Sequences',
-                        data: dashboardData.yearDistribution.data,
-                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#9ca3af' } },
-                        x: { grid: { display: false }, ticks: { color: '#9ca3af' } }
-                    }
-                }
-            });
-
-            // Model performance chart (placeholder)
-            new Chart(document.getElementById('perfChart'), {
-                type: 'radar',
-                data: {
-                    labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score', 'AUC'],
-                    datasets: [{
-                        label: 'XGBoost (Target)',
-                        data: [0.85, 0.83, 0.87, 0.85, 0.90],
-                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                        borderColor: 'rgba(16, 185, 129, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 1,
-                            grid: { color: 'rgba(255,255,255,0.1)' },
-                            angleLines: { color: 'rgba(255,255,255,0.1)' },
-                            pointLabels: { color: '#9ca3af' },
-                            ticks: { display: false }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            renderLastUpdate();
-            renderDataSources();
-            renderPipeline();
-            renderSampleData();
-            renderCharts();
+        // Location distribution chart
+        new Chart(document.getElementById('locationChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Unknown','Victoria','New York','Brisbane','South Australia','Sydney','Nicaragua','Oklahoma','Thailand','Perth'],
+                datasets: [{
+                    data: [1144,127,86,73,73,56,42,35,32,30],
+                    backgroundColor: ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#84cc16','#f97316','#6366f1']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'right', labels: { color: '#9ca3af', font: { size: 10 } } } }
+            }
         });
     </script>
 </body>

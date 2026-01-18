@@ -1,0 +1,78 @@
+{
+  "training_date": "2026-01-18T11:34:20.589612",
+  "total_samples": 2818,
+  "features_used": 74,
+  "multiclass_model": {
+    "task": "Temporal Period Classification",
+    "classes": [
+      "period_1_2009_2013",
+      "period_2_2014_2016",
+      "period_3_2017_2019",
+      "period_4_2020_2024"
+    ],
+    "cv_accuracy": 0.8764044943820226,
+    "cv_std": 0.08339470870335365,
+    "test_accuracy": 0.9348314606741573,
+    "test_f1": 0.9347755934691802,
+    "test_precision": 0.9348551269230341,
+    "test_recall": 0.9348314606741573,
+    "top_features": {
+      "aa_Y": "0.26056314",
+      "polar_ratio": "0.09790945",
+      "aa_Q": "0.07553856",
+      "epitope_A_charge_sum": "0.049226727",
+      "epitope_E_hydro_mean": "0.04827596",
+      "aa_C": "0.045298606",
+      "epitope_C_hydro_mean": "0.045078747",
+      "epitope_C_charge_sum": "0.044142023",
+      "epitope_D_hydro_mean": "0.038965326",
+      "aa_N": "0.03367393",
+      "epitope_A_hydro_mean": "0.022150489",
+      "epitope_B_mutations": "0.019197531",
+      "epitope_B_charge_sum": "0.01573998",
+      "aa_H": "0.013806922",
+      "aa_E": "0.011950724",
+      "epitope_B_hydro_mean": "0.0104124155",
+      "aa_D": "0.008577424",
+      "aa_G": "0.008421524",
+      "aa_F": "0.00834337",
+      "hydrophobic_ratio": "0.0079952935"
+    }
+  },
+  "binary_model": {
+    "task": "Recent vs Historical Classification",
+    "classes": [
+      "historical",
+      "recent"
+    ],
+    "cv_accuracy": 0.9941573033707864,
+    "cv_std": 0.008360033814713858,
+    "test_accuracy": 0.9955056179775281,
+    "test_f1": 0.9954970725283205,
+    "test_precision": 0.9955350893350525,
+    "test_recall": 0.9955056179775281,
+    "test_roc_auc": 1.0,
+    "top_features": {
+      "aa_Y": "0.8677966",
+      "charge_std": "0.013531633",
+      "epitope_D_hydro_mean": "0.012645648",
+      "isoelectric_point_mean": "0.009681487",
+      "aa_T": "0.009377779",
+      "epitope_A_charge_sum": "0.008968079",
+      "aa_M": "0.0069519635",
+      "aromatic_ratio": "0.0065947697",
+      "aa_P": "0.0064399894",
+      "total_mutations_vs_ref": "0.005087121",
+      "aa_S": "0.0043456927",
+      "aa_R": "0.0037690746",
+      "isoelectric_point_std": "0.0036906207",
+      "hydrophobicity_mean": "0.0035831486",
+      "polar_ratio": "0.0031714325",
+      "charge_mean": "0.003076319",
+      "aa_L": "0.0026263492",
+      "epitope_D_charge_sum": "0.0024898148",
+      "aa_D": "0.0024094896",
+      "aa_F": "0.0022831047"
+    }
+  }
+}

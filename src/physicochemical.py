@@ -44,8 +44,7 @@ MOLECULAR_WEIGHT = {
     'S': 105.1, 'T': 119.1, 'W': 204.2, 'Y': 181.2, 'V': 117.1
 }
 
-# I
-soelectric Point (pI)
+# Isoelectric Point (pI)
 ISOELECTRIC_POINT = {
     'A': 6.0, 'R': 10.8, 'N': 5.4, 'D': 2.8, 'C': 5.1,
     'Q': 5.7, 'E': 3.2, 'G': 6.0, 'H': 7.6, 'I': 6.0,
@@ -68,7 +67,6 @@ EPITOPE_SITES = {
     'A': list(range(122, 147)),
     'B': list(range(155, 196)),
     'C': list(range(50, 54)) + list(range(275, 280)),
-    'D': list(range(172, 182)) + list(range(201, 220
-)),
+    'D': list(range(172, 182)) + list(range(201, 220)),
     'E': list(range(62, 65)) + list(range(78, 84))
 }
