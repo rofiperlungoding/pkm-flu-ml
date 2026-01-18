@@ -127,6 +127,13 @@ class AdvancedModelTrainer:
         X = pd.read_csv(matrix_file)
         meta = pd.read_csv(features_file)
         
+        # Handle NaN values - fill with 0
+        print(f"  Checking for NaN values...")
+        nan_count = X.isna().sum().sum()
+        if nan_count > 0:
+            print(f"  Found {nan_count} NaN values, filling with 0")
+            X = X.fillna(0)
+        
         # Binary labels
         y_binary = (meta['collection_year'] >= 2020).astype(int)
         

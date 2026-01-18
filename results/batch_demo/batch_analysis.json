@@ -1,0 +1,8 @@
+{
+  "total_sequences": 20,
+  "timestamp": "2026-01-18T19:25:20.706078",
+  "models_used": [
+    "basic_binary",
+    "basic_multiclass"
+  ]
+}

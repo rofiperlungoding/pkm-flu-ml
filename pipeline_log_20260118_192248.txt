@@ -1,0 +1,166 @@
+[2026-01-18 19:22:48] ============================================================
+[2026-01-18 19:22:48] ADVANCED H3N2 ANTIGENIC PREDICTION PIPELINE
+[2026-01-18 19:22:48] PKM-RE Team: Syifa & Rofi
+[2026-01-18 19:22:48] ============================================================
+[2026-01-18 19:22:48] 
+
+Pipeline Progress: Step 1/2
+[2026-01-18 19:22:48] 
+============================================================
+[2026-01-18 19:22:48] STEP: Advanced Model Training
+[2026-01-18 19:22:48] Description: Train ensemble and deep learning models with SHAP analysis
+[2026-01-18 19:22:48] ============================================================
+[2026-01-18 19:22:48] Executing: python scripts/advanced_model_training.py
+[2026-01-18 19:23:22] Output:
+[2026-01-18 19:23:22]   [WARNING] LightGBM not available
+[2026-01-18 19:23:22]   [WARNING] CatBoost not available
+[2026-01-18 19:23:22]   [WARNING] SHAP not available
+[2026-01-18 19:23:22]   [WARNING] TensorFlow/Keras not available
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   ADVANCED MODEL TRAINING
+[2026-01-18 19:23:22]   PKM-RE: Ensemble & Deep Learning
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   Loading data...
+[2026-01-18 19:23:22]     Using basic features (74)
+[2026-01-18 19:23:22]     Data shape: (2818, 74)
+[2026-01-18 19:23:22]     Binary distribution: [2110  708]
+[2026-01-18 19:23:22]     Multi-class distribution: [  77  440 1000  708]
+[2026-01-18 19:23:22]   Splitting data...
+[2026-01-18 19:23:22]     Binary - Train: 2254, Test: 564
+[2026-01-18 19:23:22]     Multi-class - Train: 1780, Test: 445
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   TRAINING ADVANCED MODELS
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   STACKING ENSEMBLE - BINARY
+[2026-01-18 19:23:22]   ============================================================
+[2026-01-18 19:23:22]   Training stacking ensemble...
+[2026-01-18 19:23:22] ❌ ERROR: Step failed with return code 1
+[2026-01-18 19:23:22] Error details:
+[2026-01-18 19:23:22]   joblib.externals.loky.process_executor._RemoteTraceback: 
+[2026-01-18 19:23:22]   """
+[2026-01-18 19:23:22]   Traceback (most recent call last):
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+[2026-01-18 19:23:22]       r = call_item()
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+[2026-01-18 19:23:22]       return self.fn(*self.args, **self.kwargs)
+[2026-01-18 19:23:22]              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 607, in __call__
+[2026-01-18 19:23:22]       return [func(*args, **kwargs) for func, args, kwargs in self.items]
+[2026-01-18 19:23:22]               ~~~~^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\parallel.py", line 184, in __call__
+[2026-01-18 19:23:22]       return self.function(*args, **kwargs)
+[2026-01-18 19:23:22]              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\ensemble\_base.py", line 45, in _fit_single_estimator
+[2026-01-18 19:23:22]       estimator.fit(X, y, **fit_params)
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\base.py", line 1336, in wrapper
+[2026-01-18 19:23:22]       return fit_method(estimator, *args, **kwargs)
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\ensemble\_gb.py", line 666, in fit
+[2026-01-18 19:23:22]       X, y = validate_data(
+[2026-01-18 19:23:22]              ~~~~~~~~~~~~~^
+[2026-01-18 19:23:22]           self,
+[2026-01-18 19:23:22]           ^^^^^
+[2026-01-18 19:23:22]       ...<4 lines>...
+[2026-01-18 19:23:22]           multi_output=True,
+[2026-01-18 19:23:22]           ^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]       )
+[2026-01-18 19:23:22]       ^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\validation.py", line 2919, in validate_data
+[2026-01-18 19:23:22]       X, y = check_X_y(X, y, **check_params)
+[2026-01-18 19:23:22]              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\validation.py", line 1314, in check_X_y
+[2026-01-18 19:23:22]       X = check_array(
+[2026-01-18 19:23:22]           X,
+[2026-01-18 19:23:22]       ...<12 lines>...
+[2026-01-18 19:23:22]           input_name="X",
+[2026-01-18 19:23:22]       )
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\validation.py", line 1074, in check_array
+[2026-01-18 19:23:22]       _assert_all_finite(
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~~~~~~^
+[2026-01-18 19:23:22]           array,
+[2026-01-18 19:23:22]           ^^^^^^
+[2026-01-18 19:23:22]       ...<2 lines>...
+[2026-01-18 19:23:22]           allow_nan=ensure_all_finite == "allow-nan",
+[2026-01-18 19:23:22]           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]       )
+[2026-01-18 19:23:22]       ^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\validation.py", line 133, in _assert_all_finite
+[2026-01-18 19:23:22]       _assert_all_finite_element_wise(
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[2026-01-18 19:23:22]           X,
+[2026-01-18 19:23:22]           ^^
+[2026-01-18 19:23:22]       ...<4 lines>...
+[2026-01-18 19:23:22]           input_name=input_name,
+[2026-01-18 19:23:22]           ^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]       )
+[2026-01-18 19:23:22]       ^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\validation.py", line 182, in _assert_all_finite_element_wise
+[2026-01-18 19:23:22]       raise ValueError(msg_err)
+[2026-01-18 19:23:22]   ValueError: Input X contains NaN.
+[2026-01-18 19:23:22]   GradientBoostingClassifier does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+[2026-01-18 19:23:22]   """
+[2026-01-18 19:23:22]   The above exception was the direct cause of the following exception:
+[2026-01-18 19:23:22]   Traceback (most recent call last):
+[2026-01-18 19:23:22]     File "C:\Users\rofid\Documents\PKM Box FTP\scripts\advanced_model_training.py", line 860, in <module>
+[2026-01-18 19:23:22]       main()
+[2026-01-18 19:23:22]       ~~~~^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\Documents\PKM Box FTP\scripts\advanced_model_training.py", line 800, in main
+[2026-01-18 19:23:22]       trainer.train_ensemble_stacking(X_train_bin, y_train_bin, X_test_bin, y_test_bin, task='binary')
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\Documents\PKM Box FTP\scripts\advanced_model_training.py", line 219, in train_ensemble_stacking
+[2026-01-18 19:23:22]       stacking.fit(X_train, y_train)
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\ensemble\_stacking.py", line 706, in fit
+[2026-01-18 19:23:22]       return super().fit(X, y_encoded, **fit_params)
+[2026-01-18 19:23:22]              ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\base.py", line 1336, in wrapper
+[2026-01-18 19:23:22]       return fit_method(estimator, *args, **kwargs)
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\ensemble\_stacking.py", line 211, in fit
+[2026-01-18 19:23:22]       self.estimators_ = Parallel(n_jobs=self.n_jobs)(
+[2026-01-18 19:23:22]                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+[2026-01-18 19:23:22]           delayed(_fit_single_estimator)(
+[2026-01-18 19:23:22]           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]       ...<3 lines>...
+[2026-01-18 19:23:22]           if est != "drop"
+[2026-01-18 19:23:22]           ^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]       )
+[2026-01-18 19:23:22]       ^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sklearn\utils\parallel.py", line 91, in __call__
+[2026-01-18 19:23:22]       return super().__call__(iterable_with_config_and_warning_filters)
+[2026-01-18 19:23:22]              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 2072, in __call__
+[2026-01-18 19:23:22]       return output if self.return_generator else list(output)
+[2026-01-18 19:23:22]                                                   ~~~~^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+[2026-01-18 19:23:22]       yield from self._retrieve()
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+[2026-01-18 19:23:22]       self._raise_error_fast()
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~~~~~~~~~~^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+[2026-01-18 19:23:22]       error_job.get_result(self.timeout)
+[2026-01-18 19:23:22]       ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 758, in get_result
+[2026-01-18 19:23:22]       return self._return_or_raise()
+[2026-01-18 19:23:22]              ~~~~~~~~~~~~~~~~~~~~~^^
+[2026-01-18 19:23:22]     File "C:\Users\rofid\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+[2026-01-18 19:23:22]       raise self._result
+[2026-01-18 19:23:22]   ValueError: Input X contains NaN.
+[2026-01-18 19:23:22]   GradientBoostingClassifier does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values
+[2026-01-18 19:23:22] 
+❌ Pipeline failed at step: Advanced Model Training
+[2026-01-18 19:23:22] Please check the error messages above and fix the issue.
+[2026-01-18 19:23:22] 
+============================================================
+[2026-01-18 19:23:22] PIPELINE SUMMARY
+[2026-01-18 19:23:22] ============================================================
+[2026-01-18 19:23:22] Status: ❌ FAILED
+[2026-01-18 19:23:22] Total duration: 34.06 seconds (0.57 minutes)
+[2026-01-18 19:23:22] 
+Step Results:
+[2026-01-18 19:23:22]   ❌ Advanced Model Training: 33.90s
+[2026-01-18 19:23:22] 
+Log file: pipeline_log_20260118_192248.txt
+[2026-01-18 19:23:22] Results file: pipeline_results_20260118_192322.json
+[2026-01-18 19:23:22] 
+⚠️  Pipeline failed. Please check the error messages above.

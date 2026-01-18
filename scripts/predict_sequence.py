@@ -26,7 +26,6 @@ from dotenv import load_dotenv
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from src.feature_extraction import FeatureExtractor
-from src.physicochemical import PhysicochemicalCalculator
 
 # Load environment variables
 load_dotenv()
@@ -42,12 +41,23 @@ class H3N2Predictor:
         """Initialize predictor with trained models"""
         print("Loading models...")
         
-        self.binary_model = joblib.load(
+        binary_model_dict = joblib.load(
             os.path.join(MODELS_DIR, 'h3n2_binary_model.pkl')
         )
-        self.multiclass_model = joblib.load(
+        multiclass_model_dict = joblib.load(
             os.path.join(MODELS_DIR, 'h3n2_multiclass_model.pkl')
         )
+        
+        # Extract model from dict if needed
+        if isinstance(binary_model_dict, dict) and 'model' in binary_model_dict:
+            self.binary_model = binary_model_dict['model']
+        else:
+            self.binary_model = binary_model_dict
+            
+        if isinstance(multiclass_model_dict, dict) and 'model' in multiclass_model_dict:
+            self.multiclass_model = multiclass_model_dict['model']
+        else:
+            self.multiclass_model = multiclass_model_dict
         
         # Load reference strain
         self.reference_seq = self._load_reference()
