@@ -42,3 +42,6 @@ Thumbs.db
 # Logs
 *.log
 logs
+
+# Web app (incomplete/WIP)
+web-app/
