@@ -14,8 +14,9 @@ Panduan lengkap untuk menggunakan pipeline machine learning prediksi perubahan a
 6. [Model Evaluation](#model-evaluation)
 7. [Feature Analysis](#feature-analysis)
 8. [Prediction](#prediction)
-9. [Dashboard](#dashboard)
-10. [Troubleshooting](#troubleshooting)
+9. [Batch Prediction](#batch-prediction)
+10. [Dashboard](#dashboard)
+11. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -348,6 +349,121 @@ Key Features:
 - Length: 400-700 amino acids (typical HA length ~550)
 - Valid amino acids only (ACDEFGHIKLMNPQRSTVWY)
 - Protein sequence (not DNA)
+
+---
+
+## Batch Prediction
+
+### Script: `batch_prediction.py`
+
+**Purpose:** High-performance batch prediction system for large-scale H3N2 sequence analysis
+
+**Features:**
+- Parallel processing with multiprocessing
+- Progress tracking and checkpointing
+- Memory-efficient batch processing
+- Ensemble prediction aggregation
+- Statistical analysis and visualization
+- Support for FASTA input and CSV/JSON output
+
+**Usage:**
+
+1. **Basic batch prediction:**
+```bash
+python scripts/batch_prediction.py \
+    --fasta input_sequences.fasta \
+    --output results.csv
+```
+
+2. **With advanced models and ensemble:**
+```bash
+python scripts/batch_prediction.py \
+    --fasta input_sequences.fasta \
+    --output results.json \
+    --model-type advanced \
+    --ensemble
+```
+
+3. **Parallel processing with analysis:**
+```bash
+python scripts/batch_prediction.py \
+    --fasta input_sequences.fasta \
+    --output results.csv \
+    --n-jobs 8 \
+    --batch-size 200 \
+    --analyze \
+    --analysis-dir results/batch_analysis
+```
+
+**Parameters:**
+- `--fasta`: Input FASTA file with sequences
+- `--output`: Output file (.csv or .json)
+- `--model-type`: Model type (basic, advanced, all) [default: basic]
+- `--ensemble`: Use ensemble predictions
+- `--batch-size`: Sequences per batch [default: 100]
+- `--n-jobs`: Parallel workers (-1 for all CPUs) [default: -1]
+- `--checkpoint-interval`: Save checkpoint every N sequences [default: 500]
+- `--analyze`: Perform statistical analysis
+- `--analysis-dir`: Directory for analysis outputs
+
+**Output Formats:**
+
+**CSV Output:**
+```csv
+sequence_id,sequence_length,basic_binary_prediction,basic_binary_label,basic_binary_confidence,...
+seq_001,566,1,Recent (≥2020),99.23,...
+seq_002,566,0,Historical (<2020),87.45,...
+```
+
+**JSON Output:**
+```json
+[
+  {
+    "sequence_id": "seq_001",
+    "sequence_length": 566,
+    "predictions": {
+      "basic_binary": {
+        "prediction": 1,
+        "label": "Recent (≥2020)",
+        "confidence": 99.23,
+        "probabilities": {"historical": 0.0077, "recent": 0.9923}
+      },
+      "basic_multiclass": {
+        "prediction": 3,
+        "label": "≥2020",
+        "confidence": 95.67,
+        "probabilities": {"<2010": 0.01, "2010-2014": 0.02, "2015-2019": 0.01, "≥2020": 0.96}
+      }
+    },
+    "ensemble": {
+      "binary_vote": 1,
+      "binary_label": "Recent (≥2020)",
+      "binary_confidence": 98.45,
+      "binary_uncertainty": 0.0123
+    }
+  }
+]
+```
+
+**Analysis Outputs:**
+- `batch_analysis.json`: Statistical summary
+- `batch_analysis_plots.png`: Visualization plots
+  - Prediction distribution by model
+  - Confidence distribution
+  - Box plot of confidence by model
+  - Mean confidence comparison
+
+**Performance Tips:**
+- Use `--n-jobs -1` to utilize all CPU cores
+- Increase `--batch-size` for better throughput (100-500)
+- Use `--checkpoint-interval` for resumability on large datasets
+- CSV format is faster for large datasets
+- JSON format provides more detailed information
+
+**Checkpoint System:**
+The batch prediction system automatically saves checkpoints every N sequences (default: 500). If the process is interrupted, it will resume from the last checkpoint when restarted with the same output file.
+
+**Note:** Currently, the batch prediction system requires models trained with the advanced feature extraction pipeline. For basic models, use the `predict_sequence.py` script in a loop for batch processing.
 
 ---
 

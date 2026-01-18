@@ -58,3 +58,43 @@ def extract_features_batch(sequences, reference):
         all_features.append(feat)
     
     return pd.DataFrame(all_features)
+
+
+class FeatureExtractor:
+    """
+    Class wrapper for feature extraction functions
+    Provides object-oriented interface for compatibility with advanced scripts
+    """
+    
+    def __init__(self, reference_seq):
+        """
+        Initialize feature extractor with reference sequence
+        
+        Args:
+            reference_seq: Reference protein sequence (e.g., A/Perth/16/2009)
+        """
+        self.reference_seq = reference_seq
+    
+    def extract_all_features(self, sequence):
+        """
+        Extract all features from a sequence
+        
+        Args:
+            sequence: Protein sequence string
+            
+        Returns:
+            dict: Dictionary of features
+        """
+        return extract_features(sequence, self.reference_seq)
+    
+    def extract_batch(self, sequences):
+        """
+        Extract features for multiple sequences
+        
+        Args:
+            sequences: List of protein sequences
+            
+        Returns:
+            pd.DataFrame: DataFrame with features for all sequences
+        """
+        return extract_features_batch(sequences, self.reference_seq)

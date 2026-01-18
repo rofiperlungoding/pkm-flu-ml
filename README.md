@@ -8,6 +8,25 @@
 
 ---
 
+## ⚡ Quick Start
+
+**Mau langsung jalan?** Baca ini dulu:
+
+📖 **[QUICKSTART.md](QUICKSTART.md)** - Langsung jalan dalam 5 menit!  
+📋 **[WORKFLOW.md](WORKFLOW.md)** - Step-by-step guide lengkap  
+🚀 **[ADVANCED_SYSTEM.md](docs/ADVANCED_SYSTEM.md)** - Dokumentasi sistem advanced
+
+**Atau langsung jalanin:**
+```bash
+# Basic workflow (30-60 menit)
+python run_basic.py
+
+# Advanced workflow (2-4 jam)
+python run_advanced.py
+```
+
+---
+
 ## 📋 Informasi Project
 
 | Item | Detail |
