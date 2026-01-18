@@ -5,8 +5,20 @@ Jalankan: python scripts/download_h3n2_data.py
 from Bio import Entrez, SeqIO
 import time
 import os
+from dotenv import load_dotenv
 
-Entrez.email = "opikopi32@gmail.com"
+# Load environment variables
+load_dotenv()
+
+Entrez.email = os.getenv('NCBI_EMAIL')
+Entrez.api_key = os.getenv('NCBI_API_KEY')
+
+# Validate environment variables
+if not Entrez.email:
+    raise ValueError(
+        "Missing NCBI email! Please set NCBI_EMAIL in .env file.\n"
+        "Copy .env.example to .env and fill in your credentials."
+    )
 
 def search_h3n2_ha(max_results=2000):
     print("Searching NCBI for H3N2 HA sequences...")

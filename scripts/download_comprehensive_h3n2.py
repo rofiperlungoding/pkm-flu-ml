@@ -21,10 +21,21 @@ import json
 import hashlib
 from datetime import datetime
 from collections import defaultdict
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # ============== CONFIGURATION ==============
-Entrez.email = "mrofid@student.ub.ac.id"
-Entrez.api_key = "153134c1b56a48d7acb46f82a8b6aba1f509"
+Entrez.email = os.getenv('NCBI_EMAIL')
+Entrez.api_key = os.getenv('NCBI_API_KEY')
+
+# Validate environment variables
+if not Entrez.email or not Entrez.api_key:
+    raise ValueError(
+        "Missing NCBI credentials! Please set NCBI_EMAIL and NCBI_API_KEY in .env file.\n"
+        "Copy .env.example to .env and fill in your credentials."
+    )
 
 OUTPUT_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"

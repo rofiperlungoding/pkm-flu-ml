@@ -9,6 +9,13 @@ venv/
 .venv/
 ENV/
 
+# Environment files and secrets
+.env
+*.env
+!.env.example
+config/secrets.py
+secrets.json
+
 # Jupyter Notebook
 .ipynb_checkpoints/
 
